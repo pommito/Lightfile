@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        'custom-gradient': 'linear-gradient(to top right, #1e3a8a, #1e3a8a, #172554)',
+        'custom-gradient': 'conic-gradient(at bottom right, #1e40af, #1e3a8a, #111827)',
       },
     },
     plugins: [],

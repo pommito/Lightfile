@@ -5,7 +5,7 @@ import { ImDropbox } from 'react-icons/im';
 
 function App() {
   return (
-    <div className="w-screen h-screen max-h-screen overflow-hidden bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] from-blue-800 via-blue-900 to-gray-900">
+    <div className="w-screen h-screen max-h-screen overflow-hidden bg-custom-gradient">
       <Header />
       <main className="h-[85vh] flex flex-col items-center gap-4 px-8 py-6 ">
         <h1 className="text-5xl mt-8">Free file converter</h1>
