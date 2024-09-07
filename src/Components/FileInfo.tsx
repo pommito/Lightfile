@@ -1,4 +1,5 @@
-import { FaFileDownload, FaTrashAlt, FaLongArrowAltRight } from 'react-icons/fa';
+import { FaTrashAlt, FaLongArrowAltRight } from 'react-icons/fa';
+import { ImDownload } from 'react-icons/im';
 
 import placeholder from '../assets/placeholder.png';
 
@@ -18,7 +19,7 @@ const FileInfo = () => {
         </p>
       </div>
       <button className="flex flex-row items-center gap-2 bg-blue-50 hover:bg-blue-100 text-blue-600 font-semibold ml-auto text-sm rounded-lg px-4 py-4">
-        Télécharger <FaFileDownload />
+        Télécharger <ImDownload />
       </button>
       <button className="text-red-600 hover:bg-red-100 rounded-lg px-4 py-4 text-sm">
         <FaTrashAlt />
