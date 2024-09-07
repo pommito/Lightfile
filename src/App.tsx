@@ -1,8 +1,12 @@
+import { useState } from 'react';
+
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import Dropbox from './Components/Dropbox';
 
 function App() {
+  const [fileList, setFileList] = useState<File[] | null>(null);
+
   return (
     <div className="w-screen h-screen max-h-screen overflow-hidden bg-custom-gradient">
       <Header />
@@ -13,7 +17,7 @@ function App() {
           locally on your device for enhanced privacy and security. Easily convert images, audio, and videos without any
           restrictions. Start converting now and streamline your content effortlessly with FileFlex!
         </p>
-        <Dropbox />
+        <Dropbox files={fileList} setFiles={setFileList} />
       </main>
       <Footer />
     </div>
