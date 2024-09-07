@@ -6,10 +6,11 @@ import FileInfo from './FileInfo';
 
 interface FilesListPropsType {
   files: File[];
+  setFiles: React.Dispatch<React.SetStateAction<File[]>>;
   handleDelete: (file: File) => void;
 }
 
-const FilesList = ({ files, handleDelete }: FilesListPropsType) => {
+const FilesList = ({ files, setFiles, handleDelete }: FilesListPropsType) => {
   console.log(files);
 
   const handleDownloadAllFiles = async () => {
@@ -29,15 +30,27 @@ const FilesList = ({ files, handleDelete }: FilesListPropsType) => {
     document.body.removeChild(link);
   };
 
+  const handleAddMoreFiles = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!event.target.files) return;
+
+    const newFilesToAdd = Array.from(event.target.files);
+
+    setFiles((prevFiles) => [...prevFiles, ...newFilesToAdd]);
+  };
+
   return (
     <div className="w-3/5 text-black  border border-white overflow-hidden rounded-lg">
       <div className="w-full flex flex-row justify-end items-center px-5 py-4 gap-3 bg-white/50">
         <h2 className="font-semibold mr-auto">{`Vous avez ajouté ${files.length} fichier${
           files.length > 1 ? 's' : ''
         }`}</h2>
-        <button className="flex flex-row items-center gap-2 bg-blue-50 hover:bg-blue-100 text-blue-600 font-semibold  text-sm rounded-lg px-4 py-4">
+        <label
+          className="flex flex-row items-center gap-2 bg-blue-50 hover:bg-blue-100 text-blue-600 font-semibold  text-sm rounded-lg px-4 py-4 cursor-pointer"
+          htmlFor="file"
+        >
           Ajouter des fichiers <FaFileCirclePlus />
-        </button>
+        </label>
+        <input type="file" id="file" multiple className="hidden" accept="image/*" onChange={handleAddMoreFiles} />
         <button
           className="flex flex-row items-center gap-2 bg-blue-600 text-white font-semibold text-sm rounded-lg px-4 py-4"
           onClick={handleDownloadAllFiles}

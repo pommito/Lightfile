@@ -22,7 +22,7 @@ function App() {
           votre projet web.
         </p>
         {fileList && fileList.length > 0 ? (
-          <FilesList files={fileList} handleDelete={handleFileDelete} />
+          <FilesList files={fileList} setFiles={setFileList} handleDelete={handleFileDelete} />
         ) : (
           <Dropbox setFiles={setFileList} />
         )}

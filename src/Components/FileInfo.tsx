@@ -23,8 +23,8 @@ const FileInfo = ({ file, handleDelete }: FileInfoPropsType) => {
   };
 
   return (
-    <div className="w-full max-h-16 relative flex items-center justify-start gap-5 border border-blue-600">
-      <div className="w-16 h-16 relative">
+    <div className="w-full max-h-16 relative flex items-center justify-start gap-5">
+      <div className="w-14 h-14 relative">
         <img src={url} alt="description" className="w-full h-full object-cover rounded-lg" />
       </div>
 
