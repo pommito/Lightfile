@@ -8,16 +8,19 @@ interface FileInfoPropsType {
 }
 
 const FileInfo = ({ file }: FileInfoPropsType) => {
+  const { name, size } = file;
+  const url = URL.createObjectURL(file);
+
   console.log(file);
 
   return (
     <div className="w-full max-h-16 relative flex items-center justify-start gap-5 border border-blue-600">
       <div className="w-16 h-16 relative">
-        <img src={placeholder} alt="description" className="object-cover rounded-lg" />
+        <img src={url} alt="description" className="w-full h-full object-cover rounded-lg" />
       </div>
 
       <div className="flex flex-col gap-1">
-        <p className="text-md font-semibold">Le nom du fichier vient ici</p>
+        <p className="text-md font-semibold">{name}</p>
         <p className="text-sm flex items-center gap-2">
           130 Kb
           <FaLongArrowAltRight />
