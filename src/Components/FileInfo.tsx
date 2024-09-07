@@ -1,7 +1,6 @@
 import { FaTrashAlt, FaLongArrowAltRight } from 'react-icons/fa';
 import { ImDownload } from 'react-icons/im';
-
-import placeholder from '../assets/placeholder.png';
+import { formatImageSize } from '../utils/image';
 
 interface FileInfoPropsType {
   file: File;
@@ -10,6 +9,8 @@ interface FileInfoPropsType {
 const FileInfo = ({ file }: FileInfoPropsType) => {
   const { name, size } = file;
   const url = URL.createObjectURL(file);
+
+  const formatedSize = formatImageSize(size);
 
   console.log(file);
 
@@ -22,7 +23,7 @@ const FileInfo = ({ file }: FileInfoPropsType) => {
       <div className="flex flex-col gap-1">
         <p className="text-md font-semibold">{name}</p>
         <p className="text-sm flex items-center gap-2">
-          130 Kb
+          {formatedSize}
           <FaLongArrowAltRight />
           <span className="font-bold text-blue-500">20 Kb</span>
         </p>
