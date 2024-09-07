@@ -21,8 +21,6 @@ const Dropbox = ({ setFiles }: DropboxPropsType) => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) return;
 
-    console.log('files', event.target.files);
-
     setFiles(Array.from(event.target.files));
   };
 

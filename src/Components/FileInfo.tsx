@@ -3,7 +3,13 @@ import { ImDownload } from 'react-icons/im';
 
 import placeholder from '../assets/placeholder.png';
 
-const FileInfo = () => {
+interface FileInfoPropsType {
+  file: File;
+}
+
+const FileInfo = ({ file }: FileInfoPropsType) => {
+  console.log(file);
+
   return (
     <div className="w-full max-h-16 relative flex items-center justify-start gap-5 border border-blue-600">
       <div className="w-16 h-16 relative">

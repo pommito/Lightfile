@@ -3,7 +3,13 @@ import FileInfo from './FileInfo';
 import { FaFileCirclePlus } from 'react-icons/fa6';
 import { ImDownload } from 'react-icons/im';
 
-const FilesList = () => {
+interface FilesListPropsType {
+  files: File[];
+}
+
+const FilesList = ({ files }: FilesListPropsType) => {
+  console.log(files);
+
   return (
     <div className="w-3/5 text-black  border border-white overflow-hidden rounded-lg">
       <div className="w-full flex flex-row justify-end items-center px-5 py-4 gap-3 bg-white/50">
@@ -16,9 +22,9 @@ const FilesList = () => {
         </button>
       </div>
       <div className="flex flex-col gap-6 px-5 py-5 bg-white">
-        <FileInfo />
-        <FileInfo />
-        <FileInfo />
+        {files.map((file, index) => (
+          <FileInfo key={index} file={file} />
+        ))}
       </div>
     </div>
   );
