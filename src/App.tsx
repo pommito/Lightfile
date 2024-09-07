@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Header from './Components/Header';
 import Footer from './Components/Footer';
@@ -6,7 +6,11 @@ import Dropbox from './Components/Dropbox';
 import FilesList from './Components/FilesList';
 
 function App() {
-  const [fileList, setFileList] = useState<File[] | null>(null);
+  const [fileList, setFileList] = useState<File[]>([]);
+
+  useEffect(() => {
+    console.log(fileList);
+  }, [fileList]);
 
   return (
     <div className="w-screen">
@@ -17,8 +21,7 @@ function App() {
           En seulement quelques secondes, obtenez une version optimisée de vos images pour améliorer les performances de
           votre projet web.
         </p>
-        <Dropbox setFiles={setFileList} />
-        <FilesList />
+        {fileList && fileList.length > 0 ? <FilesList /> : <Dropbox setFiles={setFileList} />}
       </main>
       <Footer />
     </div>

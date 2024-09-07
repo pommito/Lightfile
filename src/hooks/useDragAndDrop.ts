@@ -12,13 +12,17 @@ const useDragAndDrop = () => {
     setIsDragOver(false);
   }, []);
 
-  const handleDrop = useCallback((event: React.DragEvent<HTMLDivElement>) => {
-    event.preventDefault();
-    setIsDragOver(false);
+  const handleDrop = useCallback(
+    (event: React.DragEvent<HTMLDivElement>, setFiles: React.Dispatch<React.SetStateAction<File[]>>) => {
+      event.preventDefault();
+      setIsDragOver(false);
 
-    const files = event.dataTransfer.files;
-    console.log(files);
-  }, []);
+      const files = event.dataTransfer.files;
+
+      setFiles(Array.from(files));
+    },
+    []
+  );
 
   return {
     isDragOver,

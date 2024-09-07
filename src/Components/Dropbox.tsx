@@ -4,7 +4,7 @@ import useDragAndDrop from '../hooks/useDragAndDrop';
 import { GoGoal, GoFileSymlinkFile } from 'react-icons/go';
 
 interface DropboxPropsType {
-  setFiles: React.Dispatch<React.SetStateAction<File[] | null>>;
+  setFiles: React.Dispatch<React.SetStateAction<File[]>>;
 }
 
 const Dropbox = ({ setFiles }: DropboxPropsType) => {
@@ -21,8 +21,7 @@ const Dropbox = ({ setFiles }: DropboxPropsType) => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) return;
 
-    // DEV
-    console.log(event.target.files);
+    console.log('files', event.target.files);
 
     setFiles(Array.from(event.target.files));
   };
@@ -33,7 +32,7 @@ const Dropbox = ({ setFiles }: DropboxPropsType) => {
         isDragOver ? 'border-white' : 'border-white/50'
       }`}
       onDragOver={handleDragOver}
-      onDrop={handleDrop}
+      onDrop={(e) => handleDrop(e, setFiles)}
       onDragLeave={handleDragLeave}
       onClick={handleClick}
     >
