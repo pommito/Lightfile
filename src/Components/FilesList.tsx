@@ -13,7 +13,9 @@ const FilesList = ({ files }: FilesListPropsType) => {
   return (
     <div className="w-3/5 text-black  border border-white overflow-hidden rounded-lg">
       <div className="w-full flex flex-row justify-end items-center px-5 py-4 gap-3 bg-white/50">
-        <h2 className="font-semibold mr-auto">Vous avez déposé 3 fichiers</h2>
+        <h2 className="font-semibold mr-auto">{`Vous avez ajouté ${files.length} fichier${
+          files.length > 1 ? 's' : ''
+        }`}</h2>
         <button className="flex flex-row items-center gap-2 bg-blue-50 hover:bg-blue-100 text-blue-600 font-semibold  text-sm rounded-lg px-4 py-4">
           Ajouter des fichiers <FaFileCirclePlus />
         </button>
