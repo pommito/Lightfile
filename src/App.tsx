@@ -1,7 +1,6 @@
 import Header from './Components/Header';
 import Footer from './Components/Footer';
-
-import { ImDropbox } from 'react-icons/im';
+import Dropbox from './Components/Dropbox';
 
 function App() {
   return (
@@ -14,10 +13,7 @@ function App() {
           locally on your device for enhanced privacy and security. Easily convert images, audio, and videos without any
           restrictions. Start converting now and streamline your content effortlessly with FileFlex!
         </p>
-        <div className="w-3/5 h-1/2 flex flex-col justify-center items-center gap-4 bg-white/20 border rounded-lg border-dashed border-white/50 cursor-pointer">
-          <ImDropbox className="size-16" />
-          <p className="text-xl">Click or Drop your files here !</p>
-        </div>
+        <Dropbox />
       </main>
       <Footer />
     </div>
