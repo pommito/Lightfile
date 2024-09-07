@@ -11,7 +11,7 @@ export async function handleFileUploadOptimisation(file: File): Promise<File | u
   });
 
   try {
-    const formatedImage = OptimiseImage(imageElement, { width: 1080, height: 720 }, file.name);
+    const formatedImage = await OptimiseImage(imageElement, { width: 1080, height: 720 }, file.name);
     URL.revokeObjectURL(url);
 
     return formatedImage;
@@ -38,16 +38,12 @@ export function OptimiseImage(
     let targetWidth = width;
     let targetHeight = height;
 
-    // Adjust the width or height to keep the image ratio
     if (originalRatio > targetRatio) {
-      // if the image is wider than the target based on the ratio
       targetHeight = width / originalRatio;
     } else {
-      // if the image is taller than the target based on the ratio
       targetWidth = height * originalRatio;
     }
 
-    // Then ,append the right size to the canvas
     canvas.width = targetWidth;
     canvas.height = targetHeight;
 
@@ -57,7 +53,6 @@ export function OptimiseImage(
       if (blob) {
         // Créer un objet File à partir du Blob
         const imageFile = new File([blob], name, { type: 'image/webp' });
-        console.log('Image optimisée :', imageFile);
 
         resolve(imageFile);
       } else {
@@ -65,14 +60,4 @@ export function OptimiseImage(
       }
     }, 'image/webp');
   });
-}
-
-export function formatImageSize(bytes: number) {
-  if (bytes === 0) return '0 Bytes';
-
-  const k = 1024;
-  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-  const i = Math.floor(Math.log(bytes) / Math.log(k));
-
-  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
 }

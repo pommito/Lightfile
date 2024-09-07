@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import JSZip from 'jszip';
 import { FaFileCirclePlus } from 'react-icons/fa6';
 import { ImDownload } from 'react-icons/im';
@@ -13,6 +13,11 @@ interface FilesListPropsType {
 
 const FilesList = ({ files, setFiles }: FilesListPropsType) => {
   const [isOptimising, setIsOptimising] = useState(false);
+  const [optimisedFiles, setOptimisedFiles] = useState<File[]>([]);
+
+  useEffect(() => {
+    console.log('optimisedFiles', optimisedFiles);
+  }, [optimisedFiles]);
 
   const handleAddMoreFiles = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) return;
@@ -26,14 +31,38 @@ const FilesList = ({ files, setFiles }: FilesListPropsType) => {
     setFiles(files.filter((file) => file !== fileToDelete));
   };
 
-  const handleFileOptimisation = () => {
-    // setIsOptimising(true);
+  // const handleFileOptimisation = async () => {
+  //   for (const file of files) {
+  //     try {
+  //       const optimisedFile = await handleFileUploadOptimisation(file); // Attendre ici pour obtenir le fichier optimisé
+  //       console.log('Fichier optimisé :', optimisedFile);
+  //       setOptimisedFiles((prevOptimisedFiles) => [...prevOptimisedFiles, optimisedFile]); // Mettre à jour l'état
+  //     } catch (error) {
+  //       console.error("Erreur lors de l'optimisation du fichier :", error);
+  //     }
+  //   }
+  // };
 
-    files.forEach((file) => {
-      console.log('file pas optimisé', file);
+  const handleFileOptimisation = async () => {
+    setIsOptimising(true);
 
-      handleFileUploadOptimisation(file);
-    });
+    const optimisedFilesArray = await Promise.all(
+      files.map(async (file) => {
+        try {
+          const optimisedFile = await handleFileUploadOptimisation(file);
+          console.log('Fichier optimisé :', optimisedFile);
+          return optimisedFile;
+        } catch (error) {
+          console.error("Erreur lors de l'optimisation du fichier :", error);
+          return file;
+        }
+      })
+    );
+
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    setOptimisedFiles(optimisedFilesArray as File[]);
+    setIsOptimising(false);
   };
 
   const handleDownloadAllFiles = async () => {
