@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import useDragAndDrop from '../hooks/useDragAndDrop';
 
-import { ImDropbox } from 'react-icons/im';
+import { GoGoal, GoFileSymlinkFile } from 'react-icons/go';
 
 interface DropboxPropsType {
   setFiles: React.Dispatch<React.SetStateAction<File[] | null>>;
@@ -20,6 +20,8 @@ const Dropbox = ({ setFiles }: DropboxPropsType) => {
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) return;
+
+    // DEV
     console.log(event.target.files);
 
     setFiles(Array.from(event.target.files));
@@ -27,16 +29,16 @@ const Dropbox = ({ setFiles }: DropboxPropsType) => {
 
   return (
     <div
-      className={`w-3/5 h-1/2 flex flex-col justify-center items-center gap-4 bg-white/20 border rounded-lg border-dashed backdrop-blur cursor-pointer ${
-        isDragOver ? 'border-blue-700' : 'border-white/50'
+      className={`w-3/5 h-[40vh] flex flex-col justify-center items-center gap-4 bg-white/20 border rounded-lg border-dashed backdrop-blur cursor-pointer ${
+        isDragOver ? 'border-white' : 'border-white/50'
       }`}
       onDragOver={handleDragOver}
       onDrop={handleDrop}
       onDragLeave={handleDragLeave}
       onClick={handleClick}
     >
-      <ImDropbox className="size-16" />
-      <p className="text-xl">Click or Drop your files here !</p>
+      {isDragOver ? <GoGoal className="size-12" /> : <GoFileSymlinkFile className="size-12" />}
+      <p className="text-2xl font-semibold">{isDragOver ? 'Oui juste là !' : 'Cliquez ou déposez vos fichiers ici'}</p>
       <input
         type="file"
         id="file"

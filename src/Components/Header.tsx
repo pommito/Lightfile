@@ -13,7 +13,7 @@ const Header = () => {
   };
 
   return (
-    <header className="flex flex-row h-[10vh] justify-between items-center px-8 py-6 border border-red-500">
+    <header className="flex flex-row h-[10vh] justify-between items-center px-20 py-6">
       <span className="text-2xl">LOGO</span>
       <button onClick={handleThemeSwitch}>
         {theme === 'light' ? <MdOutlineLightMode className="size-6" /> : <MdOutlineDarkMode className="size-6" />}
