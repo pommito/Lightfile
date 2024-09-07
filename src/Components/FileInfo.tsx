@@ -4,9 +4,10 @@ import { formatImageSize } from '../utils/image';
 
 interface FileInfoPropsType {
   file: File;
+  handleDelete: (file: File) => void;
 }
 
-const FileInfo = ({ file }: FileInfoPropsType) => {
+const FileInfo = ({ file, handleDelete }: FileInfoPropsType) => {
   const { name, size } = file;
   const url = URL.createObjectURL(file);
 
@@ -28,10 +29,13 @@ const FileInfo = ({ file }: FileInfoPropsType) => {
           <span className="font-bold text-blue-500">20 Kb</span>
         </p>
       </div>
-      <button className="flex flex-row items-center gap-2 bg-blue-50 hover:bg-blue-100 text-blue-600 font-semibold ml-auto text-sm rounded-lg px-4 py-4">
+      <button className="flex flex-row h-12 items-center gap-2 bg-blue-50 hover:bg-blue-100 text-blue-600 font-semibold ml-auto text-sm rounded-lg px-4 py-4">
         Télécharger <ImDownload />
       </button>
-      <button className="text-red-600 hover:bg-red-100 rounded-lg px-4 py-4 text-sm">
+      <button
+        className="text-red-600 h-12 hover:bg-red-100 rounded-lg px-4 py-4 text-sm"
+        onClick={() => handleDelete(file)}
+      >
         <FaTrashAlt />
       </button>
     </div>

@@ -5,9 +5,10 @@ import { ImDownload } from 'react-icons/im';
 
 interface FilesListPropsType {
   files: File[];
+  handleDelete: (file: File) => void;
 }
 
-const FilesList = ({ files }: FilesListPropsType) => {
+const FilesList = ({ files, handleDelete }: FilesListPropsType) => {
   console.log(files);
 
   return (
@@ -25,7 +26,7 @@ const FilesList = ({ files }: FilesListPropsType) => {
       </div>
       <div className="flex flex-col gap-6 px-5 py-5 bg-white">
         {files.map((file, index) => (
-          <FileInfo key={index} file={file} />
+          <FileInfo key={index} file={file} handleDelete={handleDelete} />
         ))}
       </div>
     </div>
