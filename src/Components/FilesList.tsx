@@ -1,18 +1,18 @@
+import { useState } from 'react';
 import JSZip from 'jszip';
 import { FaFileCirclePlus } from 'react-icons/fa6';
 import { ImDownload } from 'react-icons/im';
-
+import { handleFileUploadOptimisation } from '../utils/image';
 import FileInfo from './FileInfo';
 import Button from './Button';
 
 interface FilesListPropsType {
   files: File[];
   setFiles: React.Dispatch<React.SetStateAction<File[]>>;
-  handleDelete: (file: File) => void;
 }
 
-const FilesList = ({ files, setFiles, handleDelete }: FilesListPropsType) => {
-  console.log(files);
+const FilesList = ({ files, setFiles }: FilesListPropsType) => {
+  const [isOptimising, setIsOptimising] = useState(false);
 
   const handleAddMoreFiles = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) return;
@@ -22,8 +22,18 @@ const FilesList = ({ files, setFiles, handleDelete }: FilesListPropsType) => {
     setFiles((prevFiles) => [...prevFiles, ...newFilesToAdd]);
   };
 
+  const handleFileDelete = (fileToDelete: File) => {
+    setFiles(files.filter((file) => file !== fileToDelete));
+  };
+
   const handleFileOptimisation = () => {
-    console.log('Optimiser les fichier');
+    // setIsOptimising(true);
+
+    files.forEach((file) => {
+      console.log('file pas optimisé', file);
+
+      handleFileUploadOptimisation(file);
+    });
   };
 
   const handleDownloadAllFiles = async () => {
@@ -57,13 +67,17 @@ const FilesList = ({ files, setFiles, handleDelete }: FilesListPropsType) => {
         </label>
         <input type="file" id="file" multiple className="hidden" accept="image/*" onChange={handleAddMoreFiles} />
 
-        <Button handleCLick={handleFileOptimisation}>
-          Lancer l'optimisation <ImDownload />
-        </Button>
+        {isOptimising ? (
+          <Button handleCLick={handleFileOptimisation}>Optimisation en cours...</Button>
+        ) : (
+          <Button handleCLick={handleFileOptimisation}>
+            Optimiser <ImDownload />
+          </Button>
+        )}
       </div>
       <div className="flex flex-col gap-6 px-5 py-5 bg-white">
         {files.map((file, index) => (
-          <FileInfo key={index} file={file} handleDelete={handleDelete} />
+          <FileInfo key={index} file={file} handleDelete={handleFileDelete} />
         ))}
       </div>
     </div>

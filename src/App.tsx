@@ -8,10 +8,6 @@ import FilesList from './Components/FilesList';
 function App() {
   const [fileList, setFileList] = useState<File[]>([]);
 
-  const handleFileDelete = (fileToDelete: File) => {
-    setFileList(fileList.filter((file) => file !== fileToDelete));
-  };
-
   return (
     <div className="w-screen min-h-screen flex flex-col">
       <Header />
@@ -22,7 +18,7 @@ function App() {
           votre projet web.
         </p>
         {fileList && fileList.length > 0 ? (
-          <FilesList files={fileList} setFiles={setFileList} handleDelete={handleFileDelete} />
+          <FilesList files={fileList} setFiles={setFileList} />
         ) : (
           <Dropbox setFiles={setFileList} />
         )}

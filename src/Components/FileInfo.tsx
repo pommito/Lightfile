@@ -1,6 +1,6 @@
 import { FaTrashAlt, FaLongArrowAltRight } from 'react-icons/fa';
 import { ImDownload } from 'react-icons/im';
-import { formatImageSize } from '../utils/image';
+import formatImageSize from '../utils/formatImageSize';
 
 interface FileInfoPropsType {
   file: File;
