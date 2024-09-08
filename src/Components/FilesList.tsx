@@ -1,10 +1,5 @@
-import { useEffect, useState } from 'react';
-import JSZip from 'jszip';
 import { FaFileCirclePlus } from 'react-icons/fa6';
-import { ImDownload } from 'react-icons/im';
-import { handleFileUploadOptimisation } from '../utils/image';
 import FileInfo from './FileInfo';
-import Button from './Button';
 
 interface FilesListPropsType {
   files: File[];
@@ -12,13 +7,6 @@ interface FilesListPropsType {
 }
 
 const FilesList = ({ files, setFiles }: FilesListPropsType) => {
-  const [isOptimising, setIsOptimising] = useState(false);
-  const [optimisedFiles, setOptimisedFiles] = useState<File[]>([]);
-
-  useEffect(() => {
-    console.log('optimisedFiles', optimisedFiles);
-  }, [optimisedFiles]);
-
   const handleAddMoreFiles = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) return;
 
@@ -31,56 +19,26 @@ const FilesList = ({ files, setFiles }: FilesListPropsType) => {
     setFiles(files.filter((file) => file !== fileToDelete));
   };
 
-  // const handleFileOptimisation = async () => {
-  //   for (const file of files) {
-  //     try {
-  //       const optimisedFile = await handleFileUploadOptimisation(file); // Attendre ici pour obtenir le fichier optimisé
-  //       console.log('Fichier optimisé :', optimisedFile);
-  //       setOptimisedFiles((prevOptimisedFiles) => [...prevOptimisedFiles, optimisedFile]); // Mettre à jour l'état
-  //     } catch (error) {
-  //       console.error("Erreur lors de l'optimisation du fichier :", error);
-  //     }
-  //   }
+  /**
+   * For now download all files at once is not supported, need to find a way to download all Optimised files at once
+   * But files are getting optimised one by one in the child component
+   */
+  // const handleDownloadAllFiles = async () => {
+  //   const zip = new JSZip();
+
+  //   files.forEach((file) => {
+  //     zip.file(file.name, file);
+  //   });
+
+  //   const content = await zip.generateAsync({ type: 'blob' });
+
+  //   const link = document.createElement('a');
+  //   link.href = URL.createObjectURL(content);
+  //   link.download = 'Lightfiles.zip';
+  //   document.body.appendChild(link);
+  //   link.click();
+  //   document.body.removeChild(link);
   // };
-
-  const handleFileOptimisation = async () => {
-    setIsOptimising(true);
-
-    const optimisedFilesArray = await Promise.all(
-      files.map(async (file) => {
-        try {
-          const optimisedFile = await handleFileUploadOptimisation(file);
-          console.log('Fichier optimisé :', optimisedFile);
-          return optimisedFile;
-        } catch (error) {
-          console.error("Erreur lors de l'optimisation du fichier :", error);
-          return file;
-        }
-      })
-    );
-
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    setOptimisedFiles(optimisedFilesArray as File[]);
-    setIsOptimising(false);
-  };
-
-  const handleDownloadAllFiles = async () => {
-    const zip = new JSZip();
-
-    files.forEach((file) => {
-      zip.file(file.name, file);
-    });
-
-    const content = await zip.generateAsync({ type: 'blob' });
-
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(content);
-    link.download = 'Lightfiles.zip';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
 
   return (
     <div className="w-3/5 text-black  border border-white overflow-hidden rounded-lg">
@@ -95,14 +53,6 @@ const FilesList = ({ files, setFiles }: FilesListPropsType) => {
           Ajouter des fichiers <FaFileCirclePlus />
         </label>
         <input type="file" id="file" multiple className="hidden" accept="image/*" onChange={handleAddMoreFiles} />
-
-        {isOptimising ? (
-          <Button handleCLick={handleFileOptimisation}>Optimisation en cours...</Button>
-        ) : (
-          <Button handleCLick={handleFileOptimisation}>
-            Optimiser <ImDownload />
-          </Button>
-        )}
       </div>
       <div className="flex flex-col gap-6 px-5 py-5 bg-white">
         {files.map((file, index) => (
