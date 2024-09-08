@@ -19,10 +19,13 @@ const FileInfo = ({ file, handleDelete }: FileInfoPropsType) => {
   const imageUrl = URL.createObjectURL(file);
   const imageName = extractFileName(name);
   const formatedOriginalSize = formatImageSize(size);
+  let sizeDifference;
 
   let formatedOptimisedSize;
   if (optimisedFile !== null) {
     formatedOptimisedSize = formatImageSize(optimisedFile.size);
+    // generate a function that find the poucentage of the size difference
+    sizeDifference = `(-${Math.round((1 - optimisedFile.size / size) * 100)}%)`;
   }
 
   const handleFileOptimisation = async () => {
@@ -60,8 +63,14 @@ const FileInfo = ({ file, handleDelete }: FileInfoPropsType) => {
         <p className="text-md font-semibold">{imageName}</p>
         <p className="text-sm flex items-center gap-2">
           {formatedOriginalSize}
-          <FaLongArrowAltRight />
-          <span className="font-bold text-blue-500">{formatedOptimisedSize}</span>
+          {!isOptimising && (
+            <>
+              <FaLongArrowAltRight />
+              <span className="font-bold text-blue-500">
+                {formatedOptimisedSize} {sizeDifference}
+              </span>
+            </>
+          )}
         </p>
       </div>
       {isOptimising ? (
