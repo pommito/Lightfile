@@ -4,6 +4,7 @@ import formatImageSize from '../utils/formatImageSize';
 import { handleFileUploadOptimisation } from '../utils/image';
 import { useEffect, useState } from 'react';
 import extractFileName from '../utils/extractFileName';
+import Spinner from './Spinner';
 
 interface FileInfoPropsType {
   file: File;
@@ -27,10 +28,10 @@ const FileInfo = ({ file, handleDelete }: FileInfoPropsType) => {
   const handleFileOptimisation = async () => {
     const newFileVersion = await handleFileUploadOptimisation(file);
     if (!newFileVersion) return;
+
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
     setOptimisedFile(newFileVersion);
-
-    await new Promise((resolve) => setTimeout(resolve, 750));
-
     setIsOptimising(false);
   };
 
@@ -67,7 +68,18 @@ const FileInfo = ({ file, handleDelete }: FileInfoPropsType) => {
         className="flex flex-row h-12 items-center gap-2 bg-blue-50 hover:bg-blue-100 text-blue-600 font-semibold ml-auto text-sm rounded-lg px-4 py-4"
         onClick={handleFileDownload}
       >
-        {isOptimising ? 'Optimisation...' : <ImDownload />}
+        {isOptimising ? (
+          <>
+            <span>Optimisation en cours...</span>
+            {''}
+            <Spinner />
+          </>
+        ) : (
+          <>
+            <span>Télécharger</span>
+            <ImDownload />
+          </>
+        )}
       </button>
       <button
         className="text-red-600 h-12 hover:bg-red-100 rounded-lg px-4 py-4 text-sm"
