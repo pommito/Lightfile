@@ -47,7 +47,7 @@ const FilesList = ({ files, setFiles }: FilesListPropsType) => {
           files.length > 1 ? 's' : ''
         }`}</h2>
         <label
-          className="flex flex-row items-center gap-2 bg-blue-50 hover:bg-blue-100 text-blue-600 font-semibold  text-sm rounded-lg px-4 py-4 cursor-pointer"
+          className="flex flex-row items-center gap-2 bg-blue-50 hover:bg-blue-100 text-blue-600 border border-blue-100 font-semibold  text-sm rounded-lg px-3 py-3 cursor-pointer"
           htmlFor="file"
         >
           Ajouter des fichiers <FaFileCirclePlus />

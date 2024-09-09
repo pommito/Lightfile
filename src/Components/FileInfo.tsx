@@ -74,14 +74,14 @@ const FileInfo = ({ file, handleDelete }: FileInfoPropsType) => {
         </p>
       </div>
       {isOptimising ? (
-        <button className="flex flex-row h-12 items-center gap-2 bg-blue-50 hover:bg-blue-100 text-blue-600 font-semibold ml-auto text-sm rounded-lg px-4 py-4">
+        <button className="flex flex-row h-12 items-center gap-2 bg-blue-50 hover:bg-blue-100 text-blue-600 border border-blue-200 font-semibold ml-auto text-sm rounded-lg px-4 py-4">
           <span>Optimisation en cours...</span>
           {''}
           <Spinner />
         </button>
       ) : (
         <button
-          className="flex flex-row h-12 items-center gap-2 bg-blue-600 hover:bg-blue-100 text-blue-50 font-semibold ml-auto text-sm rounded-lg px-4 py-4"
+          className="flex flex-row h-12 items-center gap-2 bg-blue-600 hover:bg-blue-700 text-blue-50 border border-blue-800 font-semibold ml-auto text-sm rounded-lg px-4 py-4"
           onClick={handleFileDownload}
         >
           <span>Télécharger</span>

@@ -14,7 +14,7 @@ const Header = () => {
 
   return (
     <header className="flex flex-row h-[10vh] justify-between items-center px-20 py-6">
-      <span className="text-2xl">LOGO</span>
+      <span className="text-2xl">Lightfile</span>
       <button className=" hover:bg-slate-800 rounded-lg px-3 py-3 text-sm" onClick={handleThemeSwitch}>
         {theme === 'light' ? <MdOutlineLightMode className="size-5" /> : <MdOutlineDarkMode className="size-5" />}
       </button>
