@@ -7,12 +7,12 @@ const Footer = () => {
       <p className="flex items-center gap-3">
         <span>
           Made by{' '}
-          <a href="#" className="">
+          <a href="https://www.linkedin.com/in/victor-lebecq-developpeur-react-wordpress-freelance/" className="">
             Victor
           </a>
         </span>
         |
-        <a href="#" className="flex items-center gap-1">
+        <a href="https://github.com/pommito/Lightfile" target="blank" className="flex items-center gap-1">
           <IoLogoGithub />
           Github
         </a>
