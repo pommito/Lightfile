@@ -4,6 +4,11 @@
 
 body,
 html {
+  background-color: #ececec;
+  color: #131313;
+}
+
+.dark {
   background-color: #131313;
-  color: white;
+  color: #ececec;
 }

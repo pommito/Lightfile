@@ -26,7 +26,7 @@ const Dropbox = ({ setFiles }: DropboxPropsType) => {
 
   return (
     <div
-      className={`w-3/5 h-[45vh] flex flex-col justify-center items-center gap-4 bg-white/20 border rounded-lg border-dashed backdrop-blur cursor-pointer ${
+      className={`w-3/5 h-[45vh] flex flex-col justify-center items-center gap-4 bg-black/20 dark:bg-white/20 border rounded-lg border-dashed backdrop-blur cursor-pointer ${
         isDragOver ? 'border-white' : 'border-white/50'
       }`}
       onDragOver={handleDragOver}
