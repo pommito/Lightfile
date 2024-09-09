@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { MdOutlineLightMode, MdOutlineDarkMode } from 'react-icons/md';
 
 const Header = () => {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
 
   const handleThemeSwitch = () => {
     setDarkMode(!darkMode);
