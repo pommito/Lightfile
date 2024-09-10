@@ -26,7 +26,7 @@ const Dropbox = ({ setFiles }: DropboxPropsType) => {
 
   return (
     <div
-      className={`w-3/5 h-[45vh] flex flex-col justify-center items-center gap-4 bg-black/20 dark:bg-white/20 border rounded-lg border-dashed backdrop-blur cursor-pointer ${
+      className={`w-[90%] xl:w-3/5 h-[45vh] flex flex-col justify-center items-center gap-4 bg-black/20 dark:bg-white/20 border rounded-lg border-dashed backdrop-blur cursor-pointer ${
         isDragOver ? 'border-white' : 'border-white/50'
       }`}
       onDragOver={handleDragOver}
@@ -35,7 +35,9 @@ const Dropbox = ({ setFiles }: DropboxPropsType) => {
       onClick={handleClick}
     >
       {isDragOver ? <GoGoal className="size-12" /> : <GoFileSymlinkFile className="size-12" />}
-      <p className="text-2xl font-semibold">{isDragOver ? 'Oui juste là !' : 'Cliquez ou déposez vos fichiers ici'}</p>
+      <p className="text-2xl text-center font-semibold">
+        {isDragOver ? 'Oui juste là !' : 'Cliquez ou déposez vos fichiers ici'}
+      </p>
       <input
         type="file"
         id="file"
