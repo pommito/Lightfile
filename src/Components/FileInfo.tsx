@@ -40,10 +40,11 @@ const FileInfo = ({ file, handleDelete }: FileInfoPropsType) => {
 
   const handleFileDownload = () => {
     if (!optimisedFile) return;
+
     const optimisedImageurl = URL.createObjectURL(optimisedFile);
     const link = document.createElement('a');
     link.href = optimisedImageurl;
-    link.download = imageName;
+    link.download = optimisedFile.name;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

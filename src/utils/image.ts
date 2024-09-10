@@ -12,7 +12,7 @@ export async function handleFileUploadOptimisation(file: File): Promise<File | u
   });
 
   try {
-    const formatedImage = await OptimiseImage(imageElement, { width: 1280, height: 720 }, file.name);
+    const formatedImage = await OptimiseImage(imageElement, { width: 1440, height: 1080 }, file.name);
     URL.revokeObjectURL(url);
 
     return formatedImage;
@@ -73,8 +73,13 @@ export function OptimiseImage(
     canvas.toBlob(
       (blob) => {
         if (blob) {
-          const fileName = name.replace(/\.[^/.]+$/, '') + fileExtension;
+          // Utilisation d'un nom de fichier correct avec l'extension
+          const fileName = name.replace(/\s+/g, '_').replace(/\.[^/.]+$/, '') + fileExtension;
+          console.log('Nom de fichier généré:', fileName); // Affiche le nom de fichier généré
+
           const imageFile = new File([blob], fileName, { type: outputFormat });
+          console.log('Fichier généré:', imageFile); // Affiche les détails du fichier généré
+
           resolve(imageFile);
         } else {
           reject(new Error('La conversion a échoué'));
