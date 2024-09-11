@@ -41,7 +41,7 @@ const FilesList = ({ files, setFiles }: FilesListPropsType) => {
   // };
 
   return (
-    <div className="w-3/5 text-black  border border-white overflow-hidden rounded-lg">
+    <div className=" w-[90%] xl:w-3/5 text-black  border border-white overflow-hidden rounded-lg">
       <div className="w-full flex flex-row justify-end items-center px-5 py-4 gap-3 bg-white/50">
         <h2 className="font-semibold mr-auto">{`Vous avez ajouté ${files.length} fichier${
           files.length > 1 ? 's' : ''
