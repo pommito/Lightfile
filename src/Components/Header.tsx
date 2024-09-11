@@ -10,7 +10,7 @@ const Header = () => {
   };
 
   return (
-    <header className="flex flex-row h-[10vh] justify-between items-center px-20 py-6">
+    <header className="flex flex-row h-[10vh] justify-between items-center  px-8 py-6">
       <span className="text-2xl">Lightfile</span>
       <button
         className=" hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg px-3 py-3 text-sm"

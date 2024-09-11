@@ -50,11 +50,11 @@ const FilesList = ({ files, setFiles }: FilesListPropsType) => {
           className="flex flex-row items-center gap-2 bg-blue-50 hover:bg-blue-100 text-blue-600 border border-blue-100 font-semibold  text-sm rounded-lg px-3 py-3 cursor-pointer"
           htmlFor="file"
         >
-          Ajouter des fichiers <FaFileCirclePlus />
+          <span className="hidden md:inline">Ajouter des fichiers</span> <FaFileCirclePlus />
         </label>
         <input type="file" id="file" multiple className="hidden" accept="image/*" onChange={handleAddMoreFiles} />
       </div>
-      <div className="flex flex-col gap-6 px-5 py-5 bg-white">
+      <div className="flex flex-col gap-3 md:gap-6  px-2 py-2 md:px-5 md:py-5 bg-white">
         {files.map((file, index) => (
           <FileInfo key={index} file={file} handleDelete={handleFileDelete} />
         ))}
