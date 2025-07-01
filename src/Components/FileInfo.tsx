@@ -1,17 +1,22 @@
-import { FaTrashAlt, FaLongArrowAltRight } from 'react-icons/fa';
-import { ImDownload } from 'react-icons/im';
-import formatImageSize from '../utils/formatImageSize';
-import { handleFileUploadOptimisation } from '../utils/image';
-import { useEffect, useState } from 'react';
-import extractFileName from '../utils/extractFileName';
-import Spinner from './Spinner';
+import { FaTrashAlt, FaLongArrowAltRight } from "react-icons/fa";
+import { ImDownload } from "react-icons/im";
+import formatImageSize from "../utils/formatImageSize";
+import { handleFileUploadOptimisation } from "../utils/image";
+import { useEffect, useState } from "react";
+import extractFileName from "../utils/extractFileName";
+import Spinner from "./Spinner";
 
 interface FileInfoPropsType {
   file: File;
   handleDelete: (file: File) => void;
+  onOptimizationComplete: (originalFile: File, optimizedFile: File) => void;
 }
 
-const FileInfo = ({ file, handleDelete }: FileInfoPropsType) => {
+const FileInfo = ({
+  file,
+  handleDelete,
+  onOptimizationComplete,
+}: FileInfoPropsType) => {
   const [isOptimising, setIsOptimising] = useState(true);
   const [optimisedFile, setOptimisedFile] = useState<File | null>(null);
 
@@ -36,13 +41,16 @@ const FileInfo = ({ file, handleDelete }: FileInfoPropsType) => {
 
     setOptimisedFile(newFileVersion);
     setIsOptimising(false);
+
+    // Notify parent component that optimization is complete
+    onOptimizationComplete(file, newFileVersion);
   };
 
   const handleFileDownload = () => {
     if (!optimisedFile) return;
 
     const optimisedImageurl = URL.createObjectURL(optimisedFile);
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = optimisedImageurl;
     link.download = optimisedFile.name;
     document.body.appendChild(link);
@@ -57,7 +65,11 @@ const FileInfo = ({ file, handleDelete }: FileInfoPropsType) => {
   return (
     <div className="w-full max-h-16 relative flex items-center justify-start  gap-2 md:gap-5">
       <div className="w-14 h-14 relative">
-        <img src={imageUrl} alt="description" className="w-full h-full object-cover rounded-lg" />
+        <img
+          src={imageUrl}
+          alt="description"
+          className="w-full h-full object-cover rounded-lg"
+        />
       </div>
 
       <div className="flex flex-col gap-1">
@@ -77,7 +89,7 @@ const FileInfo = ({ file, handleDelete }: FileInfoPropsType) => {
       {isOptimising ? (
         <button className="flex flex-row h-12 items-center gap-2 bg-blue-50 hover:bg-blue-100 text-blue-600 border border-blue-200 font-semibold ml-auto text-sm rounded-lg px-4 py-4">
           <span className="hidden md:inline">Optimisation en cours...</span>
-          {''}
+          {""}
           <Spinner />
         </button>
       ) : (
